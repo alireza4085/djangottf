@@ -1,0 +1,256 @@
+<!-- newschool/templates/your_html_file.html -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>essey Information</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            margin: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background-color 0.3s ease;
+            color: var(--text-color);
+        }
+
+        :root {
+            --background-color: #f2f2f2;
+            --text-color: #000000;
+            --khat:#04AA6D;
+            --sub:#12aa24f8;
+            --form:#D9EEE1;
+        }
+
+        body.dark-mode {
+            --background-color: #303a42;
+            --text-color: #cfcfcf;
+            --khat:#06280f;
+            --sub:#0a4d09f8;
+            --form:#193d3d;
+
+        }
+        form {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            background-color: var(--form);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: var(--text-color);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+       input[type="date"] {
+            height: 38px;
+            background-color: var(--form);
+            color: var(--text-color);
+            border: 2px solid var(--khat);
+        }
+
+        select {
+            appearance: none;
+            background-color: var(--backgrond-color);
+            color: var(--text-color);
+            border: 2px solid var(--khat);
+        }
+
+
+        input[type="submit"] {
+            background-color: var(--sub); /* Green */
+            color: white;
+            cursor: pointer;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: var(--sub); /* Darker Green */
+        }
+
+        fieldset {
+            border: 2px solid var(--khat);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: var(--form);
+        }
+        legend {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        
+       #toggle-dark-mode {
+            border-radius: 50%;
+            padding: 4px;
+            padding-bottom: 6px;
+            padding-left: 6px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 27px;
+        }
+
+        #IDes {
+            background-color: var(--form);
+            color: var(--text-color);
+            border: 2px solid var(--khat);
+        }
+
+        #Type {
+            background-color: var(--form);
+            color: var(--text-color);
+            border: 2px solid var(--khat);
+        }
+
+        #Date {
+            background-color: var(--form);
+            color: var(--text-color);
+            border: 2px solid var(--khat);
+        }
+
+
+        #submit-button,
+        #cancel-button {
+            background-color: var(--sub);
+            color: white;
+            cursor: pointer;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-right: 10px;
+            order: 1; /* تغییر ترتیب دکمه Cancel */
+        }
+
+        #cancel-button {
+            background-color: #ccc;
+            margin-right: 0; /* حذف margin برای دکمه Cancel */
+            order: 2; /* تغییر ترتیب دکمه Submit */
+        }
+
+        #submit-button,
+        #cancel-button {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 48%; /* افزودن عرض به دکمه‌ها */
+        }
+
+        #submit-button {
+            margin-right: 4%; /* افزودن فاصله بین دکمه‌ها */
+        }
+
+        #cancel-button {
+            background-color: #ccc;
+            margin-right: 0; /* حذف margin برای دکمه Cancel */
+        }
+
+
+        #submit-button:hover,
+        #cancel-button:hover {
+            background-color: #45a049;
+        }
+
+        /* افزودن استایل برای دکمه‌ها در حالت تاریک */
+        body.dark-mode #submit-button,
+        body.dark-mode #cancel-button {
+            background-color: var(--sub);
+        }
+
+        body.dark-mode #cancel-button {
+            background-color: #555;
+        }
+
+        /* افزودن استایل برای دکمه‌ها در حالت تاریک */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body class="dark-mode">
+    <div id="toggle-dark-mode" onclick="toggleDarkMode()">🌗</div>
+
+    {% comment %} <form action="{% url 'submit_data' %}" method="post">
+                {% csrf_token %} {% endcomment %}
+    <form >
+        {% csrf_token %}
+
+        <h1>essey Information</h1>
+
+        <fieldset>
+            <legend>essey</legend>
+    
+            <label for="IDes">article number :</label>
+            <input type="number" id="IDes" name="IDes" required>
+            
+            <label for="Type">Type of article :</label>
+            <input type="text" id="Type" name="Type" required>
+             
+            <label for="Date">Date of the article :</label>
+            <input type="date" id="Date" name="Date" required>
+
+        </fieldset>
+
+            <div id="button-container">
+                <button id="cancel-button" type="button" onclick="window.history.back()">Cancel</button>
+                <button id="submit-button" type="submit">Submit</button>
+            </div>
+    </form>
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        };
+    </script>
+</body>
+
+</html>

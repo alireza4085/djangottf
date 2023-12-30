@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>researcher List</title>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        :root {
+            --background-color: #f2f2f2;
+            --text-color: #000000;
+            --table-header-bg: #D9EEE1;
+            --table-header-text: #000000;
+            --table-row-hover: #f5f5f5;
+            --header-bg-color: #D9EEE1;
+            --header-text-color: #000000;
+        }
+
+        body.dark-mode {
+            --background-color: #303a42;
+            --text-color: #cfcfcf;
+            --table-header-bg: #193d3d;
+            --table-header-text: #cfcfcf;
+            --table-row-hover: #666;
+            --header-bg-color: #193d3d;
+            --header-text-color: #cfcfcf;
+        }
+
+        header {
+            background-color: var(--header-bg-color);
+            color: var(--header-text-color);
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 8px; /* تغییر اینجا */
+        }
+
+        th, td {
+            padding: 12px; /* تغییر اینجا */
+            text-align: left;
+            border-bottom: 1px solid var(--text-color);
+        }
+
+        th {
+            background-color: var(--table-header-bg);
+            color: var(--table-header-text);
+        }
+
+        tr:hover {
+            background-color: var(--table-row-hover);
+        }
+        
+
+        .edit-link,
+        .delete-link {
+            display: inline-block;
+            margin-right: 10px;
+            color: #2196F3;
+            text-decoration: none;
+        }
+
+        .edit-link i,
+        .delete-link i {
+            margin-right: 3px;
+        }
+
+        /* Add dark mode toggle button */
+        #toggle-dark-mode {
+            border-radius: 50%;
+            padding: 4px;
+            padding-bottom: 6px;
+            padding-left: 6px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 27px;
+        }
+    </style>
+</head>
+
+<body class="dark-mode">
+    <div id="toggle-dark-mode" onclick="toggleDarkMode()">🌗</div>
+
+    <header>
+        <h1>researcher List Header</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}" style="color: rgb(20, 143, 32);">Home</a></li>
+                <!-- ... -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>researcher List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ResearcherID</th>
+                    <th>National code </th>
+                    <th>First Name </th>
+                    <th>Last Name </th>
+                    <th>Date of Birth </th>
+                    <th>Side </th>
+                    <th>Phone number </th>
+                    <th>Email </th>
+                    <th>Proficiency </th>
+                    <th>City </th>
+                    <th>Street And Alley </th>
+                    <th>Plaque </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for researcher in Researcher_user %}
+                    <tr>
+                        <td>{{ researcher.0 }}</td>
+                        <td>{{ researcher.1 }}</td>
+                        <td>{{ researcher.4 }}</td>
+                        <td>{{ researcher.5 }}</td>
+                        <td>{{ researcher.6 }}</td>
+                        <td>{{ researcher.2 }}</td>
+                        <td>{{ researcher.7 }}</td>
+                        <td>{{ researcher.8 }}</td>
+                        <td>{{ researcher.9 }}</td>
+                        <td>{{ researcher.10 }}</td>
+                        <td>{{ researcher.11 }}</td>
+                        <td>{{ researcher.12 }}</td>
+                        <td>
+                            <a class="edit-link" href="{% url 'edit-researcher' ID_re=researcher.0 %}">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a class="delete-link" href="{% url 'delete-researcher' ID_re=researcher.0 %}">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!-- templates/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Awesome Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            transition: background-color 0.3s ease;
+            color: var(--text-color);
+        }
+
+        :root {
+            --background-color: #f2f2f2;
+            --text-color: #000000;
+            --butt-color: #04AA6D;
+            --hover-color: #057a4f;
+            --container-color: #D9EEE1;
+            --textbutt-color: #000000;
+            --boxshadow-color: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.19) -1px 3px 9px;
+            
+        }
+
+        body.dark-mode {
+            --background-color: #303a42;
+            --text-color: #cfcfcf;
+            --butt-color: #04935f;
+            --hover-color: #047149;
+            --container-color: #193d3d;
+            --textbutt-color: #c1c1c1;
+            --boxshadow-color: rgba(50, 50, 90, 0.19) 0px 10px 20px, rgba(50, 50, 50, 0.19) 0px 1px 1px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px 56px;
+            background-color: var(--container-color);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            box-sizing: border-box;
+            text-align: center;
+
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: 48% 4% 48%;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button:hover,
+        .theme-btn:hover {
+            background-color: var(--hover-color); /* Darker Green */
+        }
+
+        .theme-btn,
+        .button {
+            box-shadow: var(--boxshadow-color);
+            background-color: var(--butt-color); /* Green */
+            color: var(--textbutt-color);
+            cursor: pointer;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        #toggle-dark-mode {
+            /* border: 1px solid black; */
+            border-radius: 50%;
+            padding: 4px;
+            padding-bottom: 6px;
+            padding-left: 6px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 27px;
+        }
+    </style>
+</head>
+
+<body class="dark-mode">
+    <div id="toggle-dark-mode" onclick="toggleDarkMode()">🌗</div>
+
+    <div class="container">
+        <h1>University research system project</h1>
+        <!-- <div class="buttons">
+            <button class="button" onclick="handleButtonClick('/personality')">Add personality  </button>
+            <div></div>
+            <button class="button" onclick="handleButtonClick('/personality_list')">Show personality</button>
+        </div> -->
+        <div class="buttons">
+            <button class="button" onclick="handleButtonClick('/researcher')">Add researcher</button>
+            <div></div>
+            <button class="button" onclick="handleButtonClick('/researcher_list')">Show researcher</button>
+        </div>
+        <div class="buttons">
+            <button class="button" onclick="handleButtonClick('/superrisor')">Add superrisor</button>
+            <div></div>
+            <button class="button" onclick="handleButtonClick('/superrisor_list')">Show superrisor</button>
+        </div>
+        <div class="buttons">
+            <button class="button" onclick="handleButtonClick('/institute')">Add institute</button>
+            <div></div>
+            <button class="button" onclick="handleButtonClick('/institute_list')">Show institute</button>
+        </div>
+        <div class="buttons">
+            <button class="button" onclick="handleButtonClick('/essey')">Add essey</button>
+            <div></div>
+            <button class="button" onclick="handleButtonClick('/essey_list')">Show essey</button>
+        </div>
+        <div class="buttons">
+            <button class="button" onclick="handleButtonClick('/inventions')">Add inventions</button>
+            <div></div>
+            <button class="button" onclick="handleButtonClick('/inventions_list')">Show inventions</button>
+        </div>
+        <div class="buttons">
+            <button class="button" onclick="handleButtonClick('/budget')">Add budget</button>
+            <div></div>
+            <button class="button" onclick="handleButtonClick('/budget_list')">Show budget</button>
+        </div>
+        <div class="buttons">
+            <button class="button" onclick="handleButtonClick('/personality_list')">Show personality</button>
+            <div></div>
+            <button class="button" onclick="handleButtonClick('/activity_list')">Show activity</button>
+        </div>
+        
+        <script>
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+            }
+            
+            function handleButtonClick(page) {
+                if (page) {
+                    window.location.href = page;
+            }
+        }
+    </script>
+</body>
+
+</html>
