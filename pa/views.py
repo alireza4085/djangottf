@@ -7,7 +7,7 @@ from mysql.connector import Error
 def home(request):
     return render(request,'home.html')
 
-#############################################################
+##############################################################
 
 def researcher(request):
     return render(request,'researcher.html')
