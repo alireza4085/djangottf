@@ -427,4 +427,4 @@ def edit_researcher_view(request, ID_re):
     return HttpResponse("An error occurred.")     
 
 
-################ fuck you mamad
+################ fuck you mamadasda
