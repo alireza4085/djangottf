@@ -425,3 +425,6 @@ def edit_researcher_view(request, ID_re):
             connection.close()
 
     return HttpResponse("An error occurred.")     
+
+
+################ fuck you mamad
