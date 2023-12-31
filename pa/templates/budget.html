@@ -234,8 +234,8 @@
 
     {% comment %} <form action="{% url 'submit_data' %}" method="post">
                 {% csrf_token %} {% endcomment %}
-    <form >
-        {% csrf_token %}
+        <form method="POST" action="{% url 'addbudget' %}">
+            {% csrf_token %}
 
         <h1>Budget Information</h1>
 

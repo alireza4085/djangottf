@@ -163,7 +163,7 @@ def delete_superrisor_view(reauest, ID_su):
     cursor.close()
     conn.close()
 
-    return redirect('researcher list')
+    return redirect('superrisor list')
 
 #############################################################################################
 
@@ -216,6 +216,27 @@ def showinstitute(request):
     context = {'institute_user': results}
     return render(request, 'institute_list.html', context)
     
+def delete_institute_view(reauest, ID_in):
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="CyRen@mysql4.85",
+        database="ali"
+    )
+    cursor = conn.cursor()
+
+    out_result = ""
+
+    out_result = cursor.callproc('delete_institute', args=[ID_in, out_result])
+    out_result_value = out_result[-1]
+    print(out_result_value)
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    return redirect('institute list')
+
 ############################################################################################3
     
 def essey(request):
@@ -267,6 +288,27 @@ def addessey(request):
         conn.close()
         return render(request, 'home.html') 
 
+def delete_essey_view(reauest, ID_es):
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="CyRen@mysql4.85",
+        database="ali"
+    )
+    cursor = conn.cursor()
+
+    out_result = ""
+
+    out_result = cursor.callproc('delete_essey', args=[ID_es, out_result])
+    out_result_value = out_result[-1]
+    print(out_result_value)
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    return redirect('essey list')
+
 ############################################################################################
 
 def inventions(request):
@@ -303,12 +345,12 @@ def addinventions(request):
         )
 
         IDinven = request.POST.get("IDinven")
-        date_of_er = request.POST.get("date_of_er")
+        date_of_re = request.POST.get("date_of_re")
         IDre = request.POST.get("IDre")
         IDsu = request.POST.get("IDsu")
         
         cursor = conn.cursor()
-        out_result = cursor.callproc("add_inventions", (IDinven, date_of_er,  IDre, IDsu, None))
+        out_result = cursor.callproc("add_inventions", (IDinven, date_of_re,  IDre, IDsu, None))
         
         # out_result_value = out_result[-1]
         # print(out_result_value)
@@ -316,6 +358,27 @@ def addinventions(request):
         cursor.close()
         conn.close()
         return render(request, 'home.html') 
+
+def delete_inventions_view(reauest, ID_inven):
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="CyRen@mysql4.85",
+        database="ali"
+    )
+    cursor = conn.cursor()
+
+    out_result = ""
+
+    out_result = cursor.callproc('delete_inventions', args=[ID_inven, out_result])
+    out_result_value = out_result[-1]
+    print(out_result_value)
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    return redirect('essey list')
 
 ##############################################################################################
 
@@ -325,7 +388,53 @@ def budget(request):
 def budget_list(request):
     return render(request,'budget_list.html')
 
+def addbudget(request):
+    if "POST" == request.method:
+        conn = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="CyRen@mysql4.85",
+            database="ali"
+        )
 
+        depositID = request.POST.get("depositID")
+        valuee = request.POST.get("valuee")
+        edate = request.POST.get("edate")
+        ddate = request.POST.get("ddate")
+        sourcee = request.POST.get("sourcee")
+        IDinven = request.POST.get("IDinven")
+
+        
+        cursor = conn.cursor()
+        out_result = cursor.callproc("add_budget", (depositID, valuee,  edate, ddate, sourcee, IDinven, None))
+        
+        # out_result_value = out_result[-1]
+        # print(out_result_value)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return render(request, 'home.html') 
+
+def delete_budget_view(reauest, deposit_ID):
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="CyRen@mysql4.85",
+        database="ali"
+    )
+    cursor = conn.cursor()
+
+    out_result = ""
+
+    out_result = cursor.callproc('delete_budget', args=[deposit_ID, out_result])
+    out_result_value = out_result[-1]
+    print(out_result_value)
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    return redirect('budget list')
 
 
 

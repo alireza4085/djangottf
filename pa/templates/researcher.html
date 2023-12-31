@@ -312,11 +312,11 @@
             <label for="proficiency">proficiency :</label>
             <input type="text" id="proficiency" name="proficiency" required>
             
-             select something:<select id="institute" name="institute" required>
+             {% comment %} select something:<select id="institute" name="institute" required>
                 {% for institute in institutes %}
                     <option value="{{ institute.id }}">{{ institute.name }}</option>
                 {% endfor %}
-            </select> 
+            </select>  {% endcomment %}
         </fieldset>
         
         <fieldset>

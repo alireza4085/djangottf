@@ -58,7 +58,7 @@ BEGIN
     SELECT Ncode INTO N_code FROM researcher WHERE IDre = ID_re;
     DELETE FROM personality WHERE Ncode = N_code;
     SET out_result = 'Delete operation successful';
-    END
+END
 
 ###########################################################################################
 
@@ -96,11 +96,11 @@ BEGIN
 	ROLLBACK;
 	END
 
-CREATE PROCEDURE `delete_SUPERRISOR`
+CREATE PROCEDURE `delete_superrisor`
   (IN ID_su INT, OUT out_result VARCHAR(255))
 BEGIN
       DECLARE N_code INT;
-      SELECT Ncode INTO N_code FROM researcher WHERE IDsu = ID_su;
+      SELECT Ncode INTO N_code FROM superrisor WHERE IDsu = ID_su;
       DELETE FROM personality WHERE Ncode = N_code;
       SET out_result = 'Delete operation successful';
   END
@@ -118,12 +118,12 @@ create table institute (
     );
 
 CREATE PROCEDURE `add_institute`(
-	    IN IN_COLLEGE VARCHAR (255),
-	    IN IN_DATE_OF_ESTABLISHMENT DATE,
-	    IN IN_COUNTRY VARCHAR(255),
-	    IN IN_CITY VARCHAR(255),
-	    IN IN_STREET VARCHAR(255),
-	    OUT OUT_RESULT VARCHAR(255))
+    IN IN_COLLEGE VARCHAR (255),
+    IN IN_DATE_OF_ESTABLISHMENT DATE,
+    IN IN_COUNTRY VARCHAR(255),
+    IN IN_CITY VARCHAR(255),
+    IN IN_STREET VARCHAR(255),
+    OUT OUT_RESULT VARCHAR(255))
 BEGIN
   START TRANSACTION;
   INSERT INTO
@@ -135,16 +135,15 @@ BEGIN
   ROLLBACK;
 END
 
-/* Mamad */
+
 CREATE PROCEDURE `delete_institute`
-  (IN ID_su INT, OUT out_result VARCHAR(255))
+  (IN ID_in INT, OUT out_result VARCHAR(255))
 BEGIN
-      DECLARE N_code INT;
-      SELECT Ncode INTO N_code FROM researcher WHERE IDsu = ID_su;
-      DELETE FROM personality WHERE Ncode = N_code;
+      DELETE FROM institute WHERE IDin = ID_in;
       SET out_result = 'Delete institute successful';
   END
-##########################################################################################
+
+-- ##########################################################################################
 
 create table essey(
   IDes int unique not null,
@@ -158,12 +157,12 @@ create table essey(
   );
 
 CREATE PROCEDURE `add_essey`(
-	    IN IN_IDes INT,
-	    IN IN_typee VARCHAR (255),
-	    IN IN_date_of_ar DATE,
-	    IN IN_IDre INT,
-	    IN IN_IDsu INT,
-	    OUT OUT_RESULT VARCHAR(255))
+    IN IN_IDes INT,
+    IN IN_typee VARCHAR (255),
+    IN IN_date_of_ar DATE,
+    IN IN_IDre INT,
+    IN IN_IDsu INT,
+    OUT OUT_RESULT VARCHAR(255))
 BEGIN
   START TRANSACTION;
   INSERT INTO essey
@@ -175,7 +174,15 @@ BEGIN
   ROLLBACK;
   END
 
-##########################################################################################
+
+CREATE PROCEDURE `delete_essey`(IN ID_es INT, OUT 
+OUT_RESULT VARCHAR(255))
+BEGIN
+      DELETE FROM essey WHERE IDes = ID_es;
+	SET out_result = 'Delete institute successful';
+	END
+
+#############################################################
 
 create table inventions(
   IDinven int unique not null,
@@ -188,11 +195,11 @@ create table inventions(
   );
 
 CREATE PROCEDURE `add_inventions`(
-	    IN IN_IDinven INT,
-	    IN IN_date_of_re DATE,
-	    IN IN_IDre INT,
-	    IN IN_IDsu INT,
-	    OUT OUT_RESULT VARCHAR(255))
+    IN IN_IDinven INT,
+    IN IN_date_of_re DATE,
+    IN IN_IDre INT,
+    IN IN_IDsu INT,
+    OUT OUT_RESULT VARCHAR(255))
 BEGIN
   START TRANSACTION;
   INSERT INTO inventions
@@ -204,6 +211,13 @@ BEGIN
   ROLLBACK;
   END
 
+  CREATE PROCEDURE `delete_inventions`(IN ID_inven INT, OUT 
+OUT_RESULT VARCHAR(255))
+BEGIN
+      DELETE FROM inventions WHERE IDinven = ID_inven;
+	SET out_result = 'Delete institute successful';
+	END
+
 ##########################################################################################
 
 create table budget(
@@ -214,7 +228,7 @@ create table budget(
     sourcee varchar(25) default 'exampel', 
     IDinven int not null,
     primary key (IDinven , depositID),
-    foreign key (IDinven) references activity (inventions)
+    foreign key (IDinven) references inventions (IDinven)
     on delete cascade
     on update cascade);
 
@@ -230,14 +244,20 @@ CREATE PROCEDURE `add_budget`(
 BEGIN
   START TRANSACTION;
   INSERT INTO budget
-    (`depositID`, valuee, edate, ddate, soutcee, IDinven)
+    (depositID, valuee, edate, ddate, sourcee, IDinven)
   VALUES  
-    (IN_IDinven , IN_date_of_re, IN_IDre, IN_IDsu);
+    (IN_depositID, IN_valuee, IN_edate, IN_ddate, IN_sourcee, IN_IDinven);
   SET out_result = 'institute added successfully';
   COMMIT;
   ROLLBACK;
   END
 
+CREATE PROCEDURE `delete_budget`(IN deposit_ID INT, OUT 
+OUT_RESULT VARCHAR(255))
+BEGIN
+      DELETE FROM budget WHERE depositID = deposit_ID;
+	SET out_result = 'Delete institute successful';
+	END
 ##########################################################################################
 
 
