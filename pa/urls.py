@@ -58,5 +58,4 @@ urlpatterns = [
     
     path('personality_list/', views.personality_list, name='personality list'),
     
-    path('activity_list/', views.activity_list, name='activity list'),
 ]

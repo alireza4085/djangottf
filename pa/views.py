@@ -388,6 +388,24 @@ def budget(request):
 def budget_list(request):
     return render(request,'budget_list.html')
 
+def showbudget(request):
+    conn = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="CyRen@mysql4.85",
+            database="ali"
+    )
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM budget ")
+    results = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    context = {'budget_user': results}
+    return render(request, 'budget_list.html', context)
+
 def addbudget(request):
     if "POST" == request.method:
         conn = mysql.connector.connect(
@@ -436,29 +454,7 @@ def delete_budget_view(reauest, deposit_ID):
 
     return redirect('budget list')
 
-
-
-
-
-
-
-def showbudget(request):
-    conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="CyRen@mysql4.85",
-            database="ali"
-    )
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT * FROM budget ")
-    results = cursor.fetchall()
-
-    cursor.close()
-    conn.close()
-
-    context = {'budget_user': results}
-    return render(request, 'budget_list.html', context)
+##############################################################################################
 
 def edit_superrisor_view(request, ID_re):
     
@@ -559,8 +555,6 @@ def edit_superrisor_view(request, ID_re):
 def personality_list(request):
     return render(request,'personality_list.html')
 
-def activity_list(request):
-    return render(request,'activity_list.html')
 
 def edit_researcher_view(request, ID_re):
     
