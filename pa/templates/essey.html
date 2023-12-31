@@ -222,23 +222,30 @@
 
     {% comment %} <form action="{% url 'submit_data' %}" method="post">
                 {% csrf_token %} {% endcomment %}
-    <form >
-        {% csrf_token %}
+        <form method="POST" action="{% url 'addessey' %}">
+            {% csrf_token %}
 
         <h1>essey Information</h1>
 
         <fieldset>
             <legend>essey</legend>
-    
+
+            
             <label for="IDes">article number :</label>
             <input type="number" id="IDes" name="IDes" required>
             
             <label for="Type">Type of article :</label>
-            <input type="text" id="Type" name="Type" required>
-             
+            <input type="text" id="Type" name="typee" required>
+            
             <label for="Date">Date of the article :</label>
-            <input type="date" id="Date" name="Date" required>
-
+            <input type="date" id="Date" name="date_of_ar" required>
+            
+            <label for="IDes">researcher ID :</label>
+            <input type="number" id="IDes" name="IDre" required>
+            
+            <label for="IDes">superrisor ID :</label>
+            <input type="number" id="IDes" name="IDsu" required>
+            
         </fieldset>
 
             <div id="button-container">

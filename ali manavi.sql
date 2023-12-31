@@ -51,13 +51,14 @@ BEGIN
   ROLLBACK;
   END
 
-CREATE PROCEDURE `delete_researcher`(IN ID_re INT, OUT out_result VARCHAR(255))
-  BEGIN
-      DECLARE N_code INT;
-      SELECT Ncode INTO N_code FROM researcher WHERE IDre = ID_re;
-      DELETE FROM personality WHERE Ncode = N_code;
-      SET out_result = 'Delete operation successful';
-  END
+CREATE PROCEDURE `delete_researcher`
+  (IN ID_re INT, OUT out_result VARCHAR(255))
+BEGIN
+    DECLARE N_code INT;
+    SELECT Ncode INTO N_code FROM researcher WHERE IDre = ID_re;
+    DELETE FROM personality WHERE Ncode = N_code;
+    SET out_result = 'Delete operation successful';
+    END
 
 ###########################################################################################
 
@@ -95,8 +96,9 @@ BEGIN
 	ROLLBACK;
 	END
 
-CREATE PROCEDURE `delete_SUPERRISOR`(IN ID_su INT, OUT out_result VARCHAR(255))
-  BEGIN
+CREATE PROCEDURE `delete_SUPERRISOR`
+  (IN ID_su INT, OUT out_result VARCHAR(255))
+BEGIN
       DECLARE N_code INT;
       SELECT Ncode INTO N_code FROM researcher WHERE IDsu = ID_su;
       DELETE FROM personality WHERE Ncode = N_code;
@@ -131,61 +133,115 @@ BEGIN
   SET out_result = 'institute added successfully';
   COMMIT;
   ROLLBACK;
-  END
+END
 
-################################################################################
+/* Mamad */
+CREATE PROCEDURE `delete_institute`
+  (IN ID_su INT, OUT out_result VARCHAR(255))
+BEGIN
+      DECLARE N_code INT;
+      SELECT Ncode INTO N_code FROM researcher WHERE IDsu = ID_su;
+      DELETE FROM personality WHERE Ncode = N_code;
+      SET out_result = 'Delete institute successful';
+  END
+##########################################################################################
 
 create table essey(
-typee varchar(25) not null, 
-Article_number int not NULL,
-IDes int unique not null,
-IDac int unique not null,
-date_of_ar date not null, 
-primary key (IDes),
-foreign key (IDre) references researcher (IDre) on delete cascade on update cascade,
-foreign key (IDsu) references superrisor (IDsu) on delete cascade on update cascade
-);
+  IDes int unique not null,
+  typee varchar(25) not null, 
+  date_of_ar date not null, 
+  IDre int not null,
+  IDsu int not null,
+  primary key (IDes),
+  foreign key (IDre) references researcher (IDre) on delete cascade on update cascade,
+  foreign key (IDsu) references superrisor (IDsu) on delete cascade on update cascade
+  );
 
-################################################################################
+CREATE PROCEDURE `add_essey`(
+	    IN IN_IDes INT,
+	    IN IN_typee VARCHAR (255),
+	    IN IN_date_of_ar DATE,
+	    IN IN_IDre INT,
+	    IN IN_IDsu INT,
+	    OUT OUT_RESULT VARCHAR(255))
+BEGIN
+  START TRANSACTION;
+  INSERT INTO essey
+    (IDes, typee, date_of_ar, IDre, IDsu)
+  VALUES  
+    (IN_IDes, IN_typee, IN_date_of_ar, IN_IDre, IN_IDsu);
+  SET out_result = 'institute added successfully';
+  COMMIT;
+  ROLLBACK;
+  END
+
+##########################################################################################
 
 create table inventions(
-IDinven int unique not null,
-IDac int unique not null,
-date_of_re date not null, 
-primary key (IDinven),
-foreign key (IDac) references activity (IDac)
-on delete cascade
-on update cascade
-);
+  IDinven int unique not null,
+  date_of_re date not null, 
+  IDre int not null,
+  IDsu int not null,
+  primary key (IDinven),
+  foreign key (IDre) references researcher (IDre) on delete cascade on update cascade,
+  foreign key (IDsu) references superrisor (IDsu) on delete cascade on update cascade
+  );
 
-######################################################################################
+CREATE PROCEDURE `add_inventions`(
+	    IN IN_IDinven INT,
+	    IN IN_date_of_re DATE,
+	    IN IN_IDre INT,
+	    IN IN_IDsu INT,
+	    OUT OUT_RESULT VARCHAR(255))
+BEGIN
+  START TRANSACTION;
+  INSERT INTO inventions
+    (IDinven, date_of_re, IDre, IDsu)
+  VALUES  
+    (IN_IDinven , IN_date_of_re, IN_IDre, IN_IDsu);
+  SET out_result = 'institute added successfully';
+  COMMIT;
+  ROLLBACK;
+  END
 
-create table activity(
-IDac int unique not null,
-IDtitle varchar(40) not null,
-primary key (IDac),
-IDre int unique not null not null,
-IDsu int unique not null, 
-foreign key (IDre) references researcher (IDre) on delete cascade on update cascade,
-foreign key (IDsu) references superrisor (IDsu) on delete cascade on update cascade
-);
-
-#################################################################
+##########################################################################################
 
 create table budget(
     depositID int unique not null,
-    IDac int unique not null,
     valuee int default '0000',
     edate date default '1402-01-01',
     ddate date default '1402-01-01',
     sourcee varchar(25) default 'exampel', 
-    primary key (IDac , depositID),
-    foreign key (IDac) references activity (IDac)
+    IDinven int not null,
+    primary key (IDinven , depositID),
+    foreign key (IDinven) references activity (inventions)
     on delete cascade
-    on update cascade
-);
+    on update cascade);
 
-###############################################################
+CREATE PROCEDURE `add_budget`(
+	  IN IN_depositID int,
+    IN IN_valuee int,
+    IN IN_edate date,
+    IN IN_ddate date,
+    IN IN_sourcee varchar(255),
+    IN IN_IDinven int,
+	  OUT OUT_RESULT VARCHAR(255)
+      )
+BEGIN
+  START TRANSACTION;
+  INSERT INTO budget
+    (`depositID`, valuee, edate, ddate, soutcee, IDinven)
+  VALUES  
+    (IN_IDinven , IN_date_of_re, IN_IDre, IN_IDsu);
+  SET out_result = 'institute added successfully';
+  COMMIT;
+  ROLLBACK;
+  END
+
+##########################################################################################
+
+
+##########################################################################################
 
 SELECT * FROM researcher inner join personality on researcher.Ncode = personality.Ncode
 
@@ -236,7 +292,15 @@ END
 
 
 
-
+create table activity(
+IDac int unique not null,
+IDtitle varchar(40) not null,
+primary key (IDac),
+IDre int unique not null not null,
+IDsu int unique not null, 
+foreign key (IDre) references researcher (IDre) on delete cascade on update cascade,
+foreign key (IDsu) references superrisor (IDsu) on delete cascade on update cascade
+);
 
 
 

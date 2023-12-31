@@ -222,8 +222,8 @@
 
     {% comment %} <form action="{% url 'submit_data' %}" method="post">
                 {% csrf_token %} {% endcomment %}
-    <form >
-        {% csrf_token %}
+        <form method="POST" action="{% url 'addinventions' %}">
+            {% csrf_token %}
 
         <h1>inventions Information</h1>
 
@@ -232,12 +232,15 @@
     
             <label for="IDinven">invention number :</label>
             <input type="number" id="IDinven" name="IDinven" required>
-            
-            <label for="Type">Type of invention :</label>
-            <input type="text" id="Type" name="Type" required>
              
             <label for="Date">Date of invention :</label>
-            <input type="date" id="Date" name="Date" required>
+            <input type="date" id="Date" name="date_of_re" required>
+
+            <label for="IDes">researcher ID :</label>
+            <input type="number" id="Date" name="IDre" required>
+            
+            <label for="IDes">superrisor ID :</label>
+            <input type="number" id="Date" name="IDsu" required>
 
         </fieldset>
 

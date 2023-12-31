@@ -21,12 +21,12 @@ urlpatterns = [
 
 
     path('essey/', views.essey, name='add essey' ),
-    # path('addessey/', views.addessey, name='addessey'),
+    path('addessey/', views.addessey, name='addessey'),
     path('essey_list/', views.showessey, name='essey list'),
 
 
     path('inventions/', views.inventions, name='add inventions' ),
-    # path('addinventions/', views.addinventions, name='addinventions'),
+    path('addinventions/', views.addinventions, name='addinventions'),
     path('inventions_list/', views.showinventions, name='inventions list'),
 
     

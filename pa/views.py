@@ -241,7 +241,32 @@ def showessey(request):
 
     context = {'essey_user': results}
     return render(request, 'essey_list.html', context)
-    
+   
+def addessey(request):
+    if "POST" == request.method:
+        conn = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="CyRen@mysql4.85",
+            database="ali"
+        )
+
+        IDes = request.POST.get("IDes")
+        typee = request.POST.get("typee")
+        date_of_ar = request.POST.get("date_of_ar")
+        IDre = request.POST.get("IDre")
+        IDsu = request.POST.get("IDsu")
+        
+        cursor = conn.cursor()
+        out_result = cursor.callproc("add_essey", (IDes, typee,  date_of_ar,  IDre, IDsu, None))
+        
+        # out_result_value = out_result[-1]
+        # print(out_result_value)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return render(request, 'home.html') 
+
 ############################################################################################
 
 def inventions(request):
@@ -268,6 +293,30 @@ def showinventions(request):
     context = {'inventions_user': results}
     return render(request, 'inventions_list.html', context)
 
+def addinventions(request):
+    if "POST" == request.method:
+        conn = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="CyRen@mysql4.85",
+            database="ali"
+        )
+
+        IDinven = request.POST.get("IDinven")
+        date_of_er = request.POST.get("date_of_er")
+        IDre = request.POST.get("IDre")
+        IDsu = request.POST.get("IDsu")
+        
+        cursor = conn.cursor()
+        out_result = cursor.callproc("add_inventions", (IDinven, date_of_er,  IDre, IDsu, None))
+        
+        # out_result_value = out_result[-1]
+        # print(out_result_value)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return render(request, 'home.html') 
+
 ##############################################################################################
 
 def budget(request):
@@ -275,6 +324,14 @@ def budget(request):
 
 def budget_list(request):
     return render(request,'budget_list.html')
+
+
+
+
+
+
+
+
 
 def showbudget(request):
     conn = mysql.connector.connect(
@@ -293,24 +350,6 @@ def showbudget(request):
 
     context = {'budget_user': results}
     return render(request, 'budget_list.html', context)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 def edit_superrisor_view(request, ID_re):
     
@@ -408,19 +447,11 @@ def edit_superrisor_view(request, ID_re):
     
     #-----------------------------------------------
 
-
-
-
-
-
-
-
 def personality_list(request):
     return render(request,'personality_list.html')
 
 def activity_list(request):
     return render(request,'activity_list.html')
-
 
 def edit_researcher_view(request, ID_re):
     
@@ -512,6 +543,3 @@ def edit_researcher_view(request, ID_re):
             connection.close()
 
     return HttpResponse("An error occurred.")     
-
-
-################ fuck you mamadasda
