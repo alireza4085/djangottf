@@ -146,12 +146,19 @@ foreign key (IDre) references researcher (IDre) on delete cascade on update casc
 foreign key (IDsu) references superrisor (IDsu) on delete cascade on update cascade
 );
 
+################################################################################
 
+create table inventions(
+IDinven int unique not null,
+IDac int unique not null,
+date_of_re date not null, 
+primary key (IDinven),
+foreign key (IDac) references activity (IDac)
+on delete cascade
+on update cascade
+);
 
-
-
-
-
+######################################################################################
 
 create table activity(
 IDac int unique not null,
@@ -163,17 +170,7 @@ foreign key (IDre) references researcher (IDre) on delete cascade on update casc
 foreign key (IDsu) references superrisor (IDsu) on delete cascade on update cascade
 );
 
-
-
-create table inventions(
-IDinven int unique not null,
-IDac int unique not null,
-date_of_re date not null, 
-primary key (IDinven),
-foreign key (IDac) references activity (IDac)
-on delete cascade
-on update cascade
-);
+#################################################################
 
 create table budget(
     depositID int unique not null,
@@ -188,6 +185,7 @@ create table budget(
     on update cascade
 );
 
+###############################################################
 
 SELECT * FROM researcher inner join personality on researcher.Ncode = personality.Ncode
 

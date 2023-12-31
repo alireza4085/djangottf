@@ -269,8 +269,7 @@
 <body class="dark-mode">
     <div id="toggle-dark-mode" onclick="toggleDarkMode()">🌗</div>
 
-    {% comment %} <form action="{% url 'submit_data' %}" method="post">
-                {% csrf_token %} {% endcomment %}
+    
         <form method="POST" action="{% url 'addresearcher' %}">
         {% csrf_token %}
 

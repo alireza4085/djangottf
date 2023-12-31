@@ -1,6 +1,6 @@
 from django.urls import path 
 from . import views
-#adfkjslkfja
+
 
 urlpatterns = [
     path('', views.home, name='home' ),
@@ -12,18 +12,40 @@ urlpatterns = [
 
     path('superrisor/', views.superrisor, name='add superrisor' ),
     path('addsuperrisor/', views.addsuperrisor, name='addsuperrisor'),
+    path('superrisor_list/', views.showsuperrisor, name='superrisor list'),
+
 
     path('institute/', views.institute, name='add institute' ),
     path('addinstitute/', views.addinstitute, name='addinstitute'),
-    
+    path('institute_list/', views.showinstitute, name='institute list'),
+
+
     path('essey/', views.essey, name='add essey' ),
+    # path('addessey/', views.addessey, name='addessey'),
+    path('essey_list/', views.showessey, name='essey list'),
+
+
     path('inventions/', views.inventions, name='add inventions' ),
+    # path('addinventions/', views.addinventions, name='addinventions'),
+    path('inventions_list/', views.showinventions, name='inventions list'),
+
+    
     path('budget/', views.budget, name='add budget' ),
+    # path('addbudget/', views.addbudget, name='addbudget'),
+    path('budget_list/', views.showbudget, name='budget list'),
+
+    
     path('superrisor_list/', views.superrisor_list, name='superrisor list'),
+    
     path('institute_list/', views.institute_list, name='institute list'),
+    
     path('essey_list/', views.essey_list, name='essey list'),
+    
     path('inventions_list/', views.inventions_list, name='inventions list'),
+    
     path('budget_list/', views.budget_list, name='budget list'),
+    
     path('personality_list/', views.personality_list, name='personality list'),
+    
     path('activity_list/', views.activity_list, name='activity list'),
 ]

@@ -135,7 +135,7 @@ def showsuperrisor(request):
     )
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM superrisor inner join personality on researcher.Ncode = personality.Ncode")
+    cursor.execute("SELECT * FROM superrisor inner join personality on superrisor.Ncode = personality.Ncode")
     results = cursor.fetchall()
 
     cursor.close()
@@ -198,16 +198,120 @@ def addinstitute(request):
         conn.close()
         return render(request, 'home.html')
     
+def showinstitute(request):
+    conn = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="CyRen@mysql4.85",
+            database="ali"
+    )
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM institute ")
+    results = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    context = {'institute_user': results}
+    return render(request, 'institute_list.html', context)
     
+############################################################################################3
     
+def essey(request):
+    return render(request,'essey.html')
     
+def essey_list(request):
+    return render(request,'essey_list.html')
+
+def showessey(request):
+    conn = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="CyRen@mysql4.85",
+            database="ali"
+    )
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM essey ")
+    results = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    context = {'essey_user': results}
+    return render(request, 'essey_list.html', context)
     
-    
-    
-    
-    
-    
-    
+############################################################################################
+
+def inventions(request):
+    return render(request,'inventions.html')
+
+def inventions_list(request):
+    return render(request,'inventions_list.html')
+
+def showinventions(request):
+    conn = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="CyRen@mysql4.85",
+            database="ali"
+    )
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM inventions ")
+    results = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    context = {'inventions_user': results}
+    return render(request, 'inventions_list.html', context)
+
+##############################################################################################
+
+def budget(request):
+    return render(request,'budget.html')
+
+def budget_list(request):
+    return render(request,'budget_list.html')
+
+def showbudget(request):
+    conn = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="CyRen@mysql4.85",
+            database="ali"
+    )
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM budget ")
+    results = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    context = {'budget_user': results}
+    return render(request, 'budget_list.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def edit_superrisor_view(request, ID_re):
     
     db_config = {
@@ -306,27 +410,10 @@ def edit_superrisor_view(request, ID_re):
 
 
 
-def essey(request):
-    return render(request,'essey.html')
-
-def inventions(request):
-    return render(request,'inventions.html')
-
-def budget(request):
-    return render(request,'budget.html')
 
 
 
 
-
-def essey_list(request):
-    return render(request,'essey_list.html')
-
-def inventions_list(request):
-    return render(request,'inventions_list.html')
-
-def budget_list(request):
-    return render(request,'budget_list.html')
 
 def personality_list(request):
     return render(request,'personality_list.html')
