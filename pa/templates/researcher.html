@@ -281,6 +281,9 @@
             
             <label for="FirstName">First Name :</label>
             <input type="text" id="FirstName" name="FirstName" required>
+
+            <label for="tel">institute ID :</label>
+            <input type="number" id="tel" name="IDin" required>
             
             <label for="LastName">Last Name :</label>
             <input type="text" id="LastName" name="LastName" required>
@@ -309,11 +312,11 @@
             <label for="proficiency">proficiency :</label>
             <input type="text" id="proficiency" name="proficiency" required>
             
-            <select id="institute" name="institute" required>
+            {% comment %} <select id="institute" name="institute" required>
                 {% for institute in institutes %}
                     <option value="{{ institute.id }}">{{ institute.name }}</option>
                 {% endfor %}
-            </select>
+            </select> {% endcomment %}
         </fieldset>
         
         <fieldset>

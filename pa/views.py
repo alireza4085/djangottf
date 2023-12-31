@@ -65,7 +65,7 @@ def showResearcher(request):
     context = {'Researcher_user': results}
     return render(request, 'researcher_list.html', context)      
 
-def delete_researcher_view(ID_re):
+def delete_researcher_view(request, ID_re):
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
@@ -144,7 +144,7 @@ def showsuperrisor(request):
     context = {'superrisor_user': results}
     return render(request, 'superrisor_list.html', context)
 
-def delete_superrisor_view(ID_su):
+def delete_superrisor_view(reauest, ID_su):
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
